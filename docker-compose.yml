@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./plots:/app/plots  # Shared plots directory
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./plots:/app/plots  # Shared plots directory
+    depends_on:
+      - backend
